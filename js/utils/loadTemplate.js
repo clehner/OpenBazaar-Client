@@ -6,8 +6,8 @@ var __ = require('underscore'),
     templateHelpers = require('./templateHelpers');
 
 module.exports = function(templateFile, callback){
-  var cur_dir = path.dirname(require.main.filename),
-      file = fs.readFileSync(cur_dir + path.sep + templateFile, "utf8"),
+  var templates = require('../templates'),
+      file = templates[path.relative('./js/templates', templateFile)],
       compiledTmpl,
       wrappedTmpl;
   

@@ -26,8 +26,7 @@ window.onblur = function() {
 };
 
 var Polyglot = require('node-polyglot'),
-    ipcRenderer = require('electron').ipcRenderer,
-    remote = require('electron').remote,
+    // remote = require('electron').remote,
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
     userModel = require('./models/userMd'),
@@ -73,7 +72,7 @@ var Polyglot = require('node-polyglot'),
     updatePolyglot,
     validateLanguage;
 
-const {shell} = require('electron');
+// const {shell} = require('electron');
 
 if (process.platform === 'darwin') {
   platformClass = 'platform-mac';
@@ -102,7 +101,8 @@ window.polyglot = new Polyglot();
   lang = validateLanguage(lang);//make sure the language is valid
   window.lang = lang; //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
   localStorage.setItem('lang', lang);
-  window.polyglot.extend(require('./languages/' + lang + '.json'));
+  // window.polyglot.extend(require('./languages/' + lang + '.json'));
+  window.polyglot.extend(require('./languages/en-US.json'));
 })(localStorage.getItem('lang'));
 
 user.on('change:language', function(md, lang) {
@@ -129,7 +129,9 @@ app.appBar = new AppBarVw({
 
 window.addEventListener('contextmenu', (e) => {
   e.preventDefault();
+  /*
   ipcRenderer.send('contextmenu-click', e);
+  */
 }, false);
 
 app.serverConfigs = new ServerConfigsCl();
@@ -144,11 +146,13 @@ app.serverConfigs.fetch().done(() => {
       default: true
     };
 
+    /*
     if (remote.getGlobal('launched_from_installer')) {
       serverConfigOpts.rest_api_port = remote.getGlobal('restAPIPort');
       serverConfigOpts.api_socket_port = remote.getGlobal('apiSocketPort');
       serverConfigOpts.heartbeat_socket_port = remote.getGlobal('heartbeatSocketPort');
     }
+    */
 
     defaultConfig = app.serverConfigs.create(serverConfigOpts);
 
@@ -188,20 +192,24 @@ app.serverConfigs.fetch().done(() => {
     } else {
       app.serverConfigs.setActive(defaultConfig.id);
     }
+    /*
   } else if (remote.getGlobal('launched_from_installer') && activeServer.get('default')) {
     activeServer.save({
       'rest_api_port': remote.getGlobal('restAPIPort'),
       'api_socket_port': remote.getGlobal('apiSocketPort'),
       'heartbeat_socket_port': remote.getGlobal('heartbeatSocketPort'),
     });
+    */
   }
 });
 
+/*
 ipcRenderer.send('activeServerChange', app.serverConfigs.getActive().toJSON());
 
 app.serverConfigs.on('activeServerChange', (server) => {
   ipcRenderer.send('activeServerChange', server.toJSON());
 });
+*/
 
 //keep user and profile urls synced with the active server configuration
 (setServerUrl = function() {
@@ -225,10 +233,12 @@ app.serverConfigs.on('activeServerChange', () => {
 var platform = process.platform;
 
 if (platform === "linux") {
+  /*
   var scaleFactor = require('electron').screen.getPrimaryDisplay().scaleFactor;
   if (scaleFactor === 0) {
     scaleFactor = 1;
   }
+  */
   $("body").css("zoom", 1 / scaleFactor);
 }
 
@@ -248,7 +258,8 @@ $('body').on('click', 'a', function(e){
     if (!/^https?:\/\//i.test(targUrl)) {
       targUrl = 'http://' + targUrl;
     }
-    shell.openExternal(targUrl);
+    window.open(targUrl);
+    // shell.openExternal(targUrl);
   } else if ($(e.target).closest("a").attr("href") && !targUrl.startsWith('#')){ //internal links should start with #
     e.preventDefault(); //just ignore any anchor with an href that is not a valid internal link
   }
@@ -377,6 +388,7 @@ $(window).bind('keydown', function(e) {
 });
 
 //manage app being or not in fullscreen mode
+/*
 ipcRenderer.on('fullscreen-enter', () => {
   $('body').addClass('fullscreen');
 });
@@ -384,6 +396,7 @@ ipcRenderer.on('fullscreen-enter', () => {
 ipcRenderer.on('fullscreen-exit', () => {
   $('body').removeClass('fullscreen');
 });
+*/
 
 //implement our statusBar view
 app.statusBar = new StatusBarView();
@@ -406,7 +419,7 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 
 var profileLoaded;
 var loadProfile = function(landingRoute, onboarded) {
-  var externalRoute = remote.getGlobal('externalRoute');
+  var externalRoute = null //remote.getGlobal('externalRoute');
 
   landingRoute = landingRoute || '#';
 

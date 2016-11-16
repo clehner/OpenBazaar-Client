@@ -4,7 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    remote = require('electron').remote,
+    // remote = require('electron').remote,
     userSettingsModel = require('../models/userMd'),
     userProfileModel = require('../models/userProfileMd');
 
@@ -199,6 +199,7 @@ module.exports = Backbone.View.extend({
   },
 
   closeApp: function(){
+    /*
     var win = remote.getCurrentWindow();
     var process = remote.process;
     if (process.platform != 'darwin') {
@@ -206,6 +207,7 @@ module.exports = Backbone.View.extend({
     } else {
       win.hide();
     }
+    */
   },
 
   clearStorage: function(){

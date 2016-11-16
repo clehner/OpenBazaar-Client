@@ -1,7 +1,7 @@
 'use strict';
 
 var loadTemplate = require('../utils/loadTemplate'),
-    remote = require('electron').remote,        
+    // remote = require('electron').remote,
     BaseVw = require('./baseVw');
 
 module.exports = BaseVw.extend({
@@ -14,15 +14,17 @@ module.exports = BaseVw.extend({
   },
 
   initialize: function(options) {
-    var style = localStorage.appBarStyle;
+    var style = localStorage.appBarStyle || 'win';
 
     this.options = options || {};
-    this.currentWindow = remote.getCurrentWindow();
+    // this.currentWindow = remote.getCurrentWindow();
     this.title = this.titlePrefix;
     
+    /*
     if (!style || ['mac', 'win'].indexOf(style) === -1) {
       style = remote.process.platform === 'darwin' ? 'mac' : 'win';
     }
+    */
 
     this.setStyle(style);    
   },
@@ -43,18 +45,23 @@ module.exports = BaseVw.extend({
   },
 
   navCloseClick: function() {
+    /*
     if (remote.process.platform !== 'darwin') {
       this.currentWindow.close();
     } else {
       this.currentWindow.hide();
     }
+    */
   },
 
   navMinClick: function() {
+    /*
     this.currentWindow.minimize();
+    */
   },
 
   navMaxClick: function() {
+    /*
     if (this.currentWindow.isMaximized()) {
       this.currentWindow.unmaximize();
       this.$('.js-navMax').attr('data-tooltip', window.polyglot.t('Maximize'));
@@ -62,6 +69,7 @@ module.exports = BaseVw.extend({
       this.currentWindow.maximize();
       this.$('.js-navMax').attr('data-tooltip', window.polyglot.t('Restore'));
     }
+    */
   },
 
   setTitle: function(text) {

@@ -15,7 +15,7 @@ var __ = require('underscore'),
     SuggestionsVw = require('../views/suggestionsVw'),
     pjson = require('../../package.json');
 
-var ipcRenderer = require('electron').ipcRenderer;  // Allows to talk Electon main process
+// var ipcRenderer = require('electron').ipcRenderer;  // Allows to talk Electon main process
 
 module.exports = baseVw.extend({
 
@@ -138,8 +138,10 @@ module.exports = baseVw.extend({
   },
 
   sendInstallUpdate: function() {
+    /*
     ipcRenderer.send('installUpdate');
     $('.js-softwareUpdate').addClass('softwareUpdateHidden');
+    */
   },
 
   dismissUpdate: function() {

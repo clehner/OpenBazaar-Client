@@ -1,7 +1,6 @@
 'use strict';
 
-var ipcRenderer = require('electron').ipcRenderer,
-    __ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     app = require('./App').getApp(),
@@ -44,11 +43,13 @@ module.exports = Backbone.Router.extend({
     this.userProfile = options.userProfile;
     this.socketView = options.socketView;
 
+    /*
     ipcRenderer.on('external-route', (e, route) => {
       this.translateRoute(route).done((translatedRoute) => {
         this.navigate(translatedRoute, { trigger: true });
       });
     });
+    */
 
     originalHistoryBack = history.back;
     history.back = function() {

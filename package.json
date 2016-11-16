@@ -16,6 +16,7 @@
     "valiquire": "valiquire --redirect valiquire-redirect.js .",
     "startwithserver": "electron main.js",
     "validate": "npm ls",
+    "build": "node js/templates/build.js > js/templates/index.json; browserify js/start -o js/bundle.js",
     "test": "exit 0"
   },
   "dependencies": {
@@ -46,7 +47,7 @@
     "yargs": "^4.1.0"
   },
   "devDependencies": {
-    "electron": "^1.4.4",
+    "browserify": "^13.1.1",
     "eslint": "^2.10.2",
     "precommit-hook": "3.0.0",
     "valiquire": "0.3.0"

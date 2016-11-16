@@ -3,7 +3,7 @@
 var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
-    remote = require('electron').remote,        
+    // remote = require('electron').remote,
     ServerConfigMd = require('../models/serverConfigMd'),
     BaseModal = require('./baseModal'),
     ServerConnectHeaderVw = require('./serverConnectHeaderVw'),
@@ -279,7 +279,7 @@ module.exports = BaseModal.extend({
         // take some time for the server to launch, so we'll retry a few
         // times.
         if (
-          remote.getGlobal('launched_from_installer') && configMd.get('default') &&
+          0/*remote.getGlobal('launched_from_installer')*/ && configMd.get('default') &&
           attempt < maxAttempts && Date.now() < (startTime + maxAttemptsTime) &&
           reason !== 'canceled'
         ) {

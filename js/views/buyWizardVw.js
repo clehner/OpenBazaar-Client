@@ -11,7 +11,7 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
     app = require('../App').getApp(),
-    clipboard = require('electron').clipboard,
+    // clipboard = require('electron').clipboard,
     templateHelpers = require('../utils/templateHelpers');
 
 module.exports = baseModal.extend({
@@ -619,7 +619,9 @@ module.exports = baseModal.extend({
   },
 
   copyPayAddress: function(){
+    /*
     clipboard.writeText(this.payURL);
+    */
   },
 
   backPurchase: function(){

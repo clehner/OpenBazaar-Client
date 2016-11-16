@@ -10,8 +10,8 @@ var __ = require('underscore'),
     chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
     app = require('../App.js').getApp(),
-    discussionCl = require('../collections/discussionCl'),
-    clipboard = require('electron').clipboard;
+    discussionCl = require('../collections/discussionCl');
+    // clipboard = require('electron').clipboard;
 
 module.exports = baseModal.extend({
 
@@ -465,7 +465,9 @@ module.exports = baseModal.extend({
   },
 
   copyTransactionPay: function(e){
+    /*
     clipboard.writeText($(e.target).data('url'));
+    */
   },
 
   checkPayment: function(){
@@ -662,7 +664,9 @@ module.exports = baseModal.extend({
   copyTx: function(e){
 
     var tx = $(e.target).data('tx');
+    /*
     clipboard.writeText(tx);
+    */
   },
 
   startDispute: function(){
